@@ -6,7 +6,7 @@ describe "creating a product class" do
   end
 
   context "initializing" do
-    it "returns a dictionary object" do
+    it "returns a product object" do
       expect(@product).to be_an_instance_of FarMar::Product
     end
   end

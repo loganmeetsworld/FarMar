@@ -6,7 +6,7 @@ describe "creating a sale class" do
   end
 
   context "initializing" do
-    it "returns a dictionary object" do
+    it "returns a sale object" do
       expect(@sale).to be_an_instance_of FarMar::Sale
     end
   end

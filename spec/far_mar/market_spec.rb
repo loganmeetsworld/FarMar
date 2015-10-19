@@ -6,7 +6,7 @@ describe "creating a market class" do
   end
 
   context "initializing" do
-    it "returns a dictionary object" do
+    it "returns a market object" do
       expect(@market).to be_an_instance_of FarMar::Market
     end
   end
