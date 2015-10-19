@@ -1,4 +1,4 @@
 require "simplecov"
 SimpleCov.start
 
-require "./lib/farm_mar.rb"
+require "./lib/far_mar"
