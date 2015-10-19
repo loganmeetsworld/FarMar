@@ -12,25 +12,28 @@ module FarMar
 			@state = 			market_hash[:state]
 			@zip = 				market_hash[:zip]
 		end
+
 		def self.all
-			market_csv = CSV.read("./support/market.csv")
+			market_csv = CSV.read("support/markets.csv")
 
-			market_array = []
+			markets = []
 
-			owner_csv.each do |row|
-				market_hash = {:identifier => row[0], :name => row[1], 
-											 :address => row[2], :street => row[3], 
-											 :city => row[4], :state => row[5]}
-				owners_array.push(Market.new(market_hash))
+			market_csv.each do |row|
+				market_hash = {:identifier => row[0].to_i, :name => row[1], 
+											 :address => row[2], :city => row[3], 
+											 :county => row[4], :state => row[5],
+											 :zip => row[6]
+											}
+				markets.push(Market.new(market_hash))
 			end
-			return owners_array
 
-			#returns a collection of Market instances, 
-			#representing all of the markets described 
-			#in the CSV
+			return markets
 		end
 
 		def self.find(id)
+			self.all.find do |line|
+				line.identifier.to_i == id
+			end
 			#returns an instance of Market where the 
 			#value of the id field in the CSV matches the 
 			#passed parameter

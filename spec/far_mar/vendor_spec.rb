@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "creating a vendor class" do
+describe "FarMar::Vendor" do
   before :each do
     @vendor = FarMar::Vendor.new
   end

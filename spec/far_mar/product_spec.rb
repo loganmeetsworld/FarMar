@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "creating a product class" do
+describe "FarMar::Product" do
   before :each do
     @product = FarMar::Product.new
   end

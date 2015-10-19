@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "creating a sale class" do
+describe "FarMar::Sale" do
   before :each do
     @sale = FarMar::Sale.new
   end
