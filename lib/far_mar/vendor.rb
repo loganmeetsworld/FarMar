@@ -17,7 +17,7 @@ module FarMar
 
 			vendor_csv.each do |row|
 				vendor_hash = {:identifier => row[0].to_i, :name => row[1], 
-											 :no_employees => row[2], :market_id => row[3]
+											 :no_employees => row[2], :market_id => row[3].to_i
 											}
 				vendors.push(Vendor.new(vendor_hash))
 			end
@@ -31,8 +31,15 @@ module FarMar
 			end
 		end
 
-		# def market
-		# end
+		def market
+			vendor_market_array = FarMar::Market.all
+
+			vendor_market_array.each do |row|
+				if row.identifier == @market_id
+					return row
+				end
+			end
+		end
 
 		# def products
 		# end

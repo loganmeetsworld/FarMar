@@ -40,4 +40,13 @@ describe "FarMar::Market" do
   		expect(FarMar::Market.find(2).name).to eq "Silverdale Farmers Market"
   	end
   end
+
+  describe "#vendors" do
+    it "returns a collection of vendor instances" do 
+      vendor = @market.vendors
+      expect(vendor).to be_an Array
+      expect(vendor[0]).to be_an_instance_of FarMar::Vendor
+      expect(vendor.length).to eq 6
+    end
+  end
 end

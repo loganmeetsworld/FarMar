@@ -6,10 +6,18 @@ describe "FarMar::Vendor" do
     	:identifier => 	 1,
 			:name => 				 "Feil-Farrell",
 			:no_employees => 8,
-			:market_id =>  	 1
+			:market_id =>  	 3
+    }
+
+    vendor_hash_2 = {
+      :identifier =>   6,
+      :name =>         "Rando Market",
+      :no_employees => 20,
+      :market_id =>    28
     }
 
     @vendor = FarMar::Vendor.new(vendor_hash)
+    @vendor_2 = FarMar::Vendor.new(vendor_hash_2)
   end
 
   context "initializing" do
@@ -37,4 +45,21 @@ describe "FarMar::Vendor" do
   		expect(FarMar::Vendor.find(25).name).to eq "Veum, Dickinson and Conroy"
   	end
   end
+
+  describe "#market" do
+    it "is an Object" do
+      market_vendor = @vendor.market
+      expect(market_vendor).to be_an Object
+      expect(market_vendor).to be_an_instance_of FarMar::Market
+    end
+
+    it "returns the FarMar::Market instance associated with the FarMar::Vendor" do
+      market_vendor_1 = @vendor.market
+      market_vendor_2 = @vendor_2.market
+
+      expect(market_vendor_1.identifier).to eq 3 # returns the market_id instead of the vendor_id
+      expect(market_vendor_2.identifier).to eq 28
+    end
+  end
+
 end

@@ -37,9 +37,16 @@ module FarMar
 		end
 
 		def vendors
-			#returns a collection of vendor 
-			#instances that are associated with 
-			#the market by the market_id field
+			vendor_market_list = []
+			vendor_array = FarMar::Vendor.all 
+
+			vendor_array.each do |vendor|
+				if vendor.market_id == @identifier
+					vendor_market_list.push(vendor)
+				end
+			end
+			return vendor_market_list
+		
 		end
 
 	end
