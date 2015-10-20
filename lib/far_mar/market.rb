@@ -34,9 +34,6 @@ module FarMar
 			self.all.find do |line|
 				line.identifier.to_i == id
 			end
-			#returns an instance of Market where the 
-			#value of the id field in the CSV matches the 
-			#passed parameter
 		end
 
 		def vendors
