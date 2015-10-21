@@ -10,7 +10,7 @@ describe "FarMar::Vendor" do
     }
 
     vendor_hash_2 = {
-      :identifier =>   6,
+      :identifier =>   1,
       :name =>         "Rando Market",
       :no_employees => 20,
       :market_id =>    28
@@ -80,8 +80,8 @@ describe "FarMar::Vendor" do
 
   describe "#revenue" do 
     it "returns the sum of sales" do 
-      revenue = @vendor.revenue
-      expect(revenue).to eq 5727
+      expect(@vendor.revenue).to eq 5727
+      expect(@vendor_2.revenue).to eq 38259
     end
   end
 

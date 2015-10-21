@@ -52,7 +52,15 @@ module FarMar
 		end
 
 		def revenue
+			revenue_array = []
 			
+			sales.each do |sale|
+				revenue = sale.amount
+				revenue_array << revenue
+			end
+
+			return revenue_array.inject(0) {|result, element| result + element}
+
 		end
 
 		# def self.by_market(market_id)
