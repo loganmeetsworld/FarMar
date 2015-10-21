@@ -49,4 +49,12 @@ describe "FarMar::Market" do
       expect(vendor.length).to eq 6
     end
   end
+
+  describe "#products" do 
+    it "returns Product objects through Vendor class" do 
+      product = @market.products
+      expect(product).to be_an Array
+      expect(product[0]).to be_an_instance_of FarMar::Product
+      expect(product.length).to eq 6
+  end
 end
