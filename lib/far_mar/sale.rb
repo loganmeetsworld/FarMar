@@ -6,7 +6,7 @@ module FarMar
 		def initialize(sales_hash)
 			@identifier = 	 sales_hash[:identifier]
 			@amount = 			 sales_hash[:amount]
-			@purchase_time = sales_hash[:purchase_time]
+			@purchase_time = DateTime.parse(sales_hash[:purchase_time])
 			@vendor_id = 		 sales_hash[:vendor_id]
 			@product_id = 	 sales_hash[:product_id]
 		end
@@ -33,14 +33,36 @@ module FarMar
 			end
 		end
 
-		# def vendor
-		# end
+		def vendor
+			vendor_sale_array = FarMar::Vendor.all
 
-		# def product
-		# end
+			vendor_sale_array.each do |row|
+				if row.identifier == @vendor_id
+					return row
+				end
+			end
+		end
 
-		# def self.between(begin_time, end_time)
-		# end
+		def product
+			product_sale_array = FarMar::Product.all
+
+			product_sale_array.each do |row|
+				if row.identifier == @product_id
+					return row
+				end
+			end
+		end
+
+		def self.between(begin_time, end_time)
+			begin_time = DateTime.parse(begin_time)
+      end_time = DateTime.parse(end_time)
+
+      sales_list = self.all
+
+			sales_list.find_all do |instance|
+				(instance.purchase_time > begin_time) && (instance.purchase_time < end_time)
+			end
+		end
 		
 	end
 end

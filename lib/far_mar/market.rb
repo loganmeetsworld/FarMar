@@ -41,5 +41,9 @@ module FarMar
 			vendor_array.find_all { |vendor| vendor.market_id == @identifier}
 		end
 
+		def products 
+			
+		end
+
 	end
 end

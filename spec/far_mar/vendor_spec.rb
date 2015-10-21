@@ -87,6 +87,10 @@ describe "FarMar::Vendor" do
 
   describe "#self.by_market(market_id)" do 
     it "returns all the vendors w given market id" do 
+      expect(FarMar::Vendor.by_market(3)).to be_an Array
+      expect(FarMar::Vendor.by_market(3).length).to eq 3
+      expect(FarMar::Vendor.by_market(10).length).to eq 9
+      expect(FarMar::Vendor.by_market(1).length).to eq 6
     end
   end
 

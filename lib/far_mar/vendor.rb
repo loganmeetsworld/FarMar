@@ -53,7 +53,7 @@ module FarMar
 
 		def revenue
 			revenue_array = []
-			
+
 			sales.each do |sale|
 				revenue = sale.amount
 				revenue_array << revenue
@@ -63,7 +63,14 @@ module FarMar
 
 		end
 
-		# def self.by_market(market_id)
-		# end
+		def self.by_market(market_id)
+			vendor_array = []
+			self.all.each do |line|
+				if line.market_id == market_id
+					vendor_array << line
+				end
+			end
+			return vendor_array
+		end
 	end
 end

@@ -36,4 +36,36 @@ describe "FarMar::Product" do
   		expect(FarMar::Product.find(25).name).to eq "Helpless Bread"
   	end
   end
+
+  describe "#vendor" do 
+    it "returns the FarMar::Vendor instance that is associated with this vendor" do 
+      expect(@product.vendor).to be_an_instance_of FarMar::Vendor
+      expect(@product.vendor.name).to eq "Feil-Farrell"
+    end
+  end
+
+  describe "#sales" do 
+    it "returns a collection of FarMar::Sale instances" do 
+      expect(@product.sales).to be_an Array 
+      expect(@product.sales[0]).to be_an_instance_of FarMar::Sale
+      expect(@product.sales[0].amount).to eq 9290
+    end
+  end
+
+  describe "#number_of_sales" do 
+    it "returns the number of times this product has been sold" do 
+      expect(@product.number_of_sales).to eq 7
+    end
+  end
+
+  describe "#self.by_vendor(vendor_id)" do 
+    it "returns all of the products with the given vendor_id" do 
+      expect(FarMar::Product.by_vendor(1)).to be_an Array
+      expect(FarMar::Product.by_vendor(1).length).to eq 1
+      expect(FarMar::Product.by_vendor(10).length).to eq 5
+      expect(FarMar::Product.by_vendor(13).length).to eq 3
+    end
+  end
+
+
 end

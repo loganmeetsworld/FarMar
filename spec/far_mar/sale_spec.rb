@@ -40,4 +40,24 @@ describe "FarMar::Sale" do
   		expect(FarMar::Sale.find(2).amount).to eq 2262
   	end
   end
+
+  describe "#vendor" do 
+    it "returns a FarMar::Vendor instance" do 
+      expect(@sale.vendor).to be_an_instance_of FarMar::Vendor
+      expect(@sale.vendor.name).to eq "Feil-Farrell"
+    end
+  end
+
+  describe "#product" do 
+    it "returns a FarMar::Product instance" do 
+      expect(@sale.product).to be_an_instance_of FarMar::Product
+      expect(@sale.product.name).to eq "Dry Beets"
+    end
+  end
+
+  describe "#self.between(begin_time, end_time)" do 
+    it "returns objects between two time arguments" do
+      expect(FarMar::Sale.between("2013-11-07 05:10:56 -0800", "2013-11-07 05:19:05 -0800").count).to eq 8 
+    end
+  end
 end

@@ -30,16 +30,33 @@ module FarMar
 			end
 		end
 
-		# def vendor
-		# end
+		def vendor
+			vendor_product_array = FarMar::Vendor.all
 
-		# def sales
-		# end
+			vendor_product_array.each do |row|
+				if row.identifier == @vendor_id
+					return row
+				end
+			end
+		end
 
-		# def number_of_sales
-		# end
+		def sales
+			sales_array = FarMar::Sale.all
+			return sales_array.find_all { |sale| sale.product_id == @identifier }
+		end
 
-		# def self.by_vendor(vendor_id)
-		# end
+		def number_of_sales
+			sales.length
+		end
+
+		def self.by_vendor(vendor_id)
+			product_array = []
+			self.all.each do |line|
+				if line.vendor_id == vendor_id
+					product_array << line
+				end
+			end
+			return product_array
+		end
 	end
 end
