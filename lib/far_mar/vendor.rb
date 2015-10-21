@@ -41,14 +41,19 @@ module FarMar
 			end
 		end
 
-		# def products
-		# end
+		def products
+			product_array = FarMar::Product.all 
+			return product_array.find_all { |product| product.vendor_id == @identifier }
+		end
 
-		# def sales
-		# end
+		def sales
+			sales_array = FarMar::Sale.all
+			return sales_array.find_all { |sale| sale.vendor_id == @identifier }
+		end
 
-		# def revenue
-		# end
+		def revenue
+			
+		end
 
 		# def self.by_market(market_id)
 		# end

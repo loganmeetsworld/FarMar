@@ -3,7 +3,7 @@ require "spec_helper"
 describe "FarMar::Vendor" do
   before :each do
   	vendor_hash = {
-    	:identifier => 	 1,
+    	:identifier => 	 2,
 			:name => 				 "Feil-Farrell",
 			:no_employees => 8,
 			:market_id =>  	 3
@@ -59,6 +59,34 @@ describe "FarMar::Vendor" do
 
       expect(market_vendor_1.identifier).to eq 3 # returns the market_id instead of the vendor_id
       expect(market_vendor_2.identifier).to eq 28
+    end
+  end
+
+  describe "#products" do
+    it "returns a collection of product instances" do
+      product = @vendor.products 
+      expect(product).to be_an Array
+      expect(product.length).to eq 2
+    end
+  end
+
+  describe "#sale" do
+    it "returns a collection of sale instances" do
+      sale = @vendor.sales 
+      expect(sale).to be_an Array
+      expect(sale.length).to eq 1
+    end
+  end
+
+  describe "#revenue" do 
+    it "returns the sum of sales" do 
+      revenue = @vendor.revenue
+      expect(revenue).to eq 5727
+    end
+  end
+
+  describe "#self.by_market(market_id)" do 
+    it "returns all the vendors w given market id" do 
     end
   end
 

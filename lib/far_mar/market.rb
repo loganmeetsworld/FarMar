@@ -37,16 +37,8 @@ module FarMar
 		end
 
 		def vendors
-			vendor_market_list = []
 			vendor_array = FarMar::Vendor.all 
-
-			vendor_array.each do |vendor|
-				if vendor.market_id == @identifier
-					vendor_market_list.push(vendor)
-				end
-			end
-			return vendor_market_list
-		
+			vendor_array.find_all { |vendor| vendor.market_id == @identifier}
 		end
 
 	end

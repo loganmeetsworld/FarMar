@@ -16,7 +16,7 @@ module FarMar
 
 			product_csv.each do |row|
 				product_hash = {:identifier => row[0].to_i, :name => row[1], 
-											  :vendor_id => row[2]
+											  :vendor_id => row[2].to_i
 											 }
 				products.push(Product.new(product_hash))
 			end
