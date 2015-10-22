@@ -16,8 +16,16 @@ describe "FarMar::Vendor" do
       :market_id =>    28
     }
 
+    vendor_hash_3 = {
+      :identifier =>   3,
+      :name =>         "Another Rando Market",
+      :no_employees => 20,
+      :market_id =>    28
+    }
+
     @vendor = FarMar::Vendor.new(vendor_hash)
     @vendor_2 = FarMar::Vendor.new(vendor_hash_2)
+    @vendor_3 = FarMar::Vendor.new(vendor_hash_3)
   end
 
   context "initializing" do
@@ -105,6 +113,7 @@ describe "FarMar::Vendor" do
 
     it "returns the top n vendor instances ranked by total revenue" do
       expect(FarMar::Vendor.most_revenue(4)[0].name).to eq "Swaniawski-Schmeler"
+      expect(FarMar::Vendor.most_revenue(3)[0].revenue).to be > FarMar::Vendor.most_revenue(3)[1].revenue
       expect(FarMar::Vendor.most_revenue(2690)[2689].name).to eq "Homenick, Ryan and Corwin"
     end
   end
@@ -129,10 +138,13 @@ describe "FarMar::Vendor" do
     end
   end
 
-  # describe "#revenue_on(date)" do 
-  #   it "returns the total revenue for that specific purchase date and vendor instance" do 
-  #     expect(@market.revenue("2013-11-07")).to eq 9
-  #   end
-  # end
+  describe "#revenue_on(date)" do 
+    it "returns the total revenue for that specific purchase date and vendor instance" do 
+      expect(@vendor.revenue_on("2013-11-07")).to be_an Fixnum
+      expect(@vendor.revenue_on("2013-11-07")).to eq 0
+      expect(@vendor_2.revenue_on("2013-11-12")).to eq 4095
+      expect(@vendor_3.revenue_on("2013-11-08")).to eq 10339
+    end
+  end
 
 end

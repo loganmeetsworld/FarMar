@@ -98,6 +98,15 @@ module FarMar
 		def revenue_on(date)
 			date = DateTime.parse(date)
 
+			revenue_array = []
+
+			sales.each do |sale|
+				if sale.purchase_time.to_date == date 
+					revenue_array << sale.amount
+				end
+			end
+			
+			return revenue_array.inject(0) { |sum, amount| sum + amount }
 		end
 
 	end
