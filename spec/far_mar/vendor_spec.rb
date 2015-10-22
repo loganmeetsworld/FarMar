@@ -94,44 +94,44 @@ describe "FarMar::Vendor" do
     end
   end
 
-  # describe "#self.most_revenue(n)" do 
-  #   it "returns an Array of length n" do 
-  #     expect(FarMar::Vendor.most_revenue(1)).to be_an Array 
-  #     expect(FarMar::Vendor.most_revenue(4).length).to eq 4
-  #     expect(FarMar::Vendor.most_revenue(10).length).to eq 10
-  #     expect(FarMar::Vendor.most_revenue(0).length).to eq 0
+  describe "#self.most_revenue(n)" do 
+    it "returns an Array of length n" do 
+      expect(FarMar::Vendor.most_revenue(1)).to be_an Array 
+      expect(FarMar::Vendor.most_revenue(4).length).to eq 4
+      expect(FarMar::Vendor.most_revenue(10).length).to eq 10
+      expect(FarMar::Vendor.most_revenue(0).length).to eq 0
 
-  #   end
+    end
 
-  #   it "returns the top n vendor instances ranked by total revenue" do
-  #     expect(FarMar::Vendor.most_revenue(4)[0].name).to eq "Swaniawski-Schmeler"
-  #     expect(FarMar::Vendor.most_revenue(2690)[2689].name).to eq "Homenick, Ryan and Corwin"
-  #   end
-  # end
+    it "returns the top n vendor instances ranked by total revenue" do
+      expect(FarMar::Vendor.most_revenue(4)[0].name).to eq "Swaniawski-Schmeler"
+      expect(FarMar::Vendor.most_revenue(2690)[2689].name).to eq "Homenick, Ryan and Corwin"
+    end
+  end
 
-  # describe "#self.most_items(n)" do 
-  #   it "returns an Array of length n" do 
-  #     expect(FarMar::Vendor.most_items(2).length).to be_an Array
-  #     expect(FarMar::Vendor.most_items(4).length).to eq 4
-  #   end
+  describe "#self.most_items(n)" do 
+    it "returns an Array of length n" do 
+      expect(FarMar::Vendor.most_items(2)).to be_an Array
+      expect(FarMar::Vendor.most_items(4).length).to eq 4
+    end
 
-  #   it "returns the top n vendor instances ranked by total number of items sold" do 
-  #     expect(FarMar::Vendor.most_items(4)[0].name).not_to eq "Swaniawski-Schmeler"
-  #     expect(FarMar::Vendor.most_items(4)[0].name).to eq ""
-  #   end
-  # end
+    it "returns the top n vendor instances ranked by total number of items sold" do 
+      expect(FarMar::Vendor.most_items(4)[0].name).not_to eq "Swaniawski-Schmeler"
+      expect(FarMar::Vendor.most_items(4)[0].name).to eq "Rolfson-Willms"
+    end
+  end
 
-  # describe "#self.revenue(date)" do 
-  #   it "returns the total revenue for that date across all vendors" do 
-  #     expect(FarMar::Vendor.revenue("2013-11-07").class).to eq Fixnum
-  #     expect(FarMar::Vendor.revenue("2013-11-07")).to eq 9060582
-  #     expect(FarMar::Vendor.revenue("2013-11-08")).to eq 9278492      
-  #   end
-  # end
+  describe "#self.revenue(date)" do 
+    it "returns the total revenue for that date across all vendors" do 
+      expect(FarMar::Vendor.revenue("2013-11-07").class).to eq Fixnum
+      expect(FarMar::Vendor.revenue("2013-11-07")).to eq 9060582
+      expect(FarMar::Vendor.revenue("2013-11-08")).to eq 9278492      
+    end
+  end
 
-  # desrcibe "#revenue(date)" do 
+  # describe "#revenue_on(date)" do 
   #   it "returns the total revenue for that specific purchase date and vendor instance" do 
-  #     expect(@market.revenue("2013-11-07")).
+  #     expect(@market.revenue("2013-11-07")).to eq 9
   #   end
   # end
 

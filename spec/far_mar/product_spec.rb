@@ -76,7 +76,7 @@ describe "FarMar::Product" do
     end
 
     it "returns the top n products instances ranked by total revenue" do 
-      expect(FarMar::Product.most_revenue(3)[0].name).to eq ""
+      expect(FarMar::Product.most_revenue(3)[0].name).to eq "Energetic Fruit"
     end
   end
 

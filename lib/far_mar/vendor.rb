@@ -47,8 +47,8 @@ module FarMar
 		end
 
 		def sales
-			sales_array = FarMar::Sale.all
-			return sales_array.find_all { |sale| sale.vendor_id == @identifier }
+			sales_array = FarMar::Sale.sales_by_vendor
+			return sales_array[@identifier]
 		end
 
 		def revenue
@@ -60,7 +60,6 @@ module FarMar
 			end
 
 			return revenue_array.inject(0) {|result, element| result + element}
-
 		end
 
 		def self.by_market(market_id)
@@ -84,20 +83,22 @@ module FarMar
 		def self.revenue(date)
 			date = DateTime.parse(date)
 
-			revenues = []
+			revenue_array = []
 
 			self.all.each do |vendor|
 				sales = vendor.sales.find_all do |sale|
 					if sale.purchase_time.to_date == date 
-						revenues << sale.amount
+						revenue_array << sale.amount
 					end
 				end
 			end
-			return revenues.inject(0) { |sum, amount| sum + amount }
+			return revenue_array.inject(0) { |sum, amount| sum + amount }
 		end
 
-		# def revenue(date)
-		# end
+		def revenue_on(date)
+			date = DateTime.parse(date)
+
+		end
 
 	end
 end
