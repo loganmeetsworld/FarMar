@@ -14,7 +14,7 @@ module FarMar
 		def self.all
 			sale_csv = CSV.read("support/sales.csv")
 
-			sales = []
+			sales ||= []
 
 			sale_csv.each do |row|
 				sale_hash = {:identifier => row[0].to_i, :amount => row[1].to_i, 

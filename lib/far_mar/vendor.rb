@@ -13,7 +13,7 @@ module FarMar
 		def self.all 
 			vendor_csv = CSV.read("support/vendors.csv")
 
-			vendors = []
+			vendors ||= []
 
 			vendor_csv.each do |row|
 				vendor_hash = {:identifier => row[0].to_i, :name => row[1], 

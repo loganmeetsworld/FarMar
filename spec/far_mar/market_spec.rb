@@ -76,7 +76,7 @@ describe "FarMar::Market" do
 
     it "returns FarMar::Market instance when seach contains vendor" do 
       expect(FarMar::Market.search("Bechtelar Inc")[0]).to be_an_instance_of FarMar::Market
-      expect(FarMar::Market.search("Bechtelar Inc").length).to eq 2
+      expect(FarMar::Market.search("Bechtelar Inc").length).to eq 1
       expect(FarMar::Market.search("Bechtelar Inc")[0].name).to eq "Silverdale Farmers Market"
     end
 
@@ -84,6 +84,11 @@ describe "FarMar::Market" do
       expect(FarMar::Market.search("Cruickshank").length).to eq 11
       expect(FarMar::Market.search("Cruickshank")[0]).to be_an_instance_of FarMar::Market
     end
+  end
 
+  describe "#prefered_vendor" do
+    it "returns the vendor with the highest revenue" do 
+      expect(@market.prefered_vendor).to eq 
+    end
   end
 end

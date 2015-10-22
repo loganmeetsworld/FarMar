@@ -16,7 +16,7 @@ module FarMar
 		def self.all
 			market_csv = CSV.read("support/markets.csv")
 
-			markets = []
+			markets ||= []
 
 			market_csv.each do |row|
 				market_hash = {:identifier => row[0].to_i, :name => row[1], 
@@ -53,28 +53,33 @@ module FarMar
 		end
 
 		def self.search(search_term)
-			market_array = []
-			vendor_array = []
+			market_array ||= []
 
-			FarMar::Vendor.all.find_all do |vendor|
-				if vendor.name.match(/#{Regexp.escape(search_term)}/i)
-					vendor_array.push(vendor)
-				end
-			end
-
-			vendor_array.each do |row|
-				if row.identifier == @market_id
-					market_array.push(row)
-				end
-			end
+			markets = self.all
 
 			self.all.find_all do |market|
-				if market.name.match(/#{Regexp.escape(search_term)}/i) 
+				if market.name.match(/#{Regexp.escape(search_term)}/i) || market.vendors.any? { |vendor| vendor.name.match(/#{Regexp.escape(search_term)}/i) }
 					market_array.push(market)
 				end
 			end
 
 			return market_array
+		end
+
+		def prefered_vendor
+
+		end
+
+		def prefered_vendor(date)
+			
+		end
+
+		def worst_vendor
+			
+		end
+
+		def worst_vendor(date)
+			
 		end
 	end
 end
