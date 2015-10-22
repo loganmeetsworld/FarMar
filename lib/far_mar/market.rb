@@ -67,7 +67,7 @@ module FarMar
 		end
 
 		def prefered_vendor
-
+			
 		end
 
 		def prefered_vendor(date)

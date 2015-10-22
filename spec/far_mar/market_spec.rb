@@ -12,7 +12,18 @@ describe "FarMar::Market" do
 			:zip => 			97202
     }
 
+     market_hash_2 = {
+      :identifier => 2,
+      :name =>      "People's Co-op Farmers Market",
+      :address =>   "30th and Burnside",
+      :city =>      "Portland",
+      :county =>    "Multnomah",
+      :state =>     "OR",
+      :zip =>       97202
+    }
+
     @market = FarMar::Market.new(market_hash)
+    @market_2 = FarMar::Market.new(market_hash_2)
   end
 
   context "initializing" do
@@ -88,7 +99,8 @@ describe "FarMar::Market" do
 
   describe "#prefered_vendor" do
     it "returns the vendor with the highest revenue" do 
-      expect(@market.prefered_vendor).to eq 
+      expect(@market_2.prefered_vendor.class).to eq Fixnum
+      expect(@market_2.prefered_vendor).to eq 8
     end
   end
 end
