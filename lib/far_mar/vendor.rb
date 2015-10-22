@@ -11,18 +11,18 @@ module FarMar
 		end
 
 		def self.all 
-			vendor_csv = CSV.read("support/vendors.csv")
+			@@vendors ||= []
 
-			vendors ||= []
-
-			vendor_csv.each do |row|
-				vendor_hash = {:identifier => row[0].to_i, :name => row[1], 
-											 :no_employees => row[2], :market_id => row[3].to_i
-											}
-				vendors.push(Vendor.new(vendor_hash))
+			if @@vendors == []
+				CSV.read("support/vendors.csv").each do |row|
+					vendor_hash = {:identifier => row[0].to_i, :name => row[1], 
+												 :no_employees => row[2], :market_id => row[3].to_i
+												}
+					@@vendors.push(Vendor.new(vendor_hash))
+				end
 			end
 
-			return vendors
+			return @@vendors
 		end
 
 		def self.find(id)
@@ -72,5 +72,32 @@ module FarMar
 			end
 			return vendor_array
 		end
+
+		def self.most_revenue(n)
+			self.all.max_by(n) { |vendor| vendor.revenue }
+		end
+
+		def self.most_items(n)
+			self.all.max_by(n) { |vendor| vendor.products.count }
+		end
+
+		def self.revenue(date)
+			date = DateTime.parse(date)
+
+			revenues = []
+
+			self.all.each do |vendor|
+				sales = vendor.sales.find_all do |sale|
+					if sale.purchase_time.to_date == date 
+						revenues << sale.amount
+					end
+				end
+			end
+			return revenues.inject(0) { |sum, amount| sum + amount }
+		end
+
+		# def revenue(date)
+		# end
+
 	end
 end

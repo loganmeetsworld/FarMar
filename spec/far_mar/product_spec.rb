@@ -67,5 +67,17 @@ describe "FarMar::Product" do
     end
   end
 
+  describe "#self.most_revenue(n)" do
+    it "returns an array of n values" do
+      expect(FarMar::Product.most_revenue(3).length).to eq 3
+      expect(FarMar::Product.most_revenue(3)).to be_an Array
+      expect(FarMar::Product.most_revenue(3)[0]).to be_an_instance_of FarMar::Product
+
+    end
+
+    it "returns the top n products instances ranked by total revenue" do 
+      expect(FarMar::Product.most_revenue(3)[0].name).to eq ""
+    end
+  end
 
 end

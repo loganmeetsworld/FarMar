@@ -10,18 +10,18 @@ module FarMar
 		end
 
 		def self.all
-			product_csv = CSV.read("support/products.csv")
+			@@products ||= []
 
-			products ||= []
-
-			product_csv.each do |row|
-				product_hash = {:identifier => row[0].to_i, :name => row[1], 
-											  :vendor_id => row[2].to_i
-											 }
-				products.push(Product.new(product_hash))
+			if @@products == []
+				CSV.read("support/products.csv").each do |row|
+					product_hash = {:identifier => row[0].to_i, :name => row[1], 
+												  :vendor_id => row[2].to_i
+												 }
+					@@products.push(Product.new(product_hash))
+				end
 			end
 
-			return products
+			return @@products
 		end
 
 		def self.find(id)
@@ -41,8 +41,8 @@ module FarMar
 		end
 
 		def sales
-			sales_array = FarMar::Sale.all
-			return sales_array.find_all { |sale| sale.product_id == @identifier }
+			sales_array = FarMar::Sale.sales_by_product
+			return sales_array[@identifier]
 		end
 
 		def number_of_sales
@@ -57,6 +57,21 @@ module FarMar
 				end
 			end
 			return product_array
+		end
+
+		def revenue
+			revenue_array = []
+
+			sales.each do |sale|
+				revenue = sale.amount
+				revenue_array << revenue
+			end
+
+			return revenue_array.inject(0) {|result, element| result + element}
+		end
+
+		def self.most_revenue(n)
+			self.all.max_by(n) { |product| product.revenue }
 		end
 	end
 end

@@ -1,3 +1,4 @@
+require "pry"
 module FarMar
 	class Sale
 
@@ -12,19 +13,24 @@ module FarMar
 		end
 
 		def self.all
-			sale_csv = CSV.read("support/sales.csv")
+			return sales_by_product.values.flatten
+		end
 
-			sales ||= []
+		def self.sales_by_product
+			@@sales_by_product ||= Hash.new {|hash, key| hash[key] = []}
 
-			sale_csv.each do |row|
-				sale_hash = {:identifier => row[0].to_i, :amount => row[1].to_i, 
-										 :purchase_time => row[2], :vendor_id => row[3].to_i, 
-										 :product_id => row[4].to_i
-										}
-				sales.push(Sale.new(sale_hash))
+			if @@sales_by_product.empty? 
+				CSV.read("support/sales.csv").each do |row|
+					sale_hash = {:identifier => row[0].to_i, :amount => row[1].to_i, 
+											 :purchase_time => row[2], :vendor_id => row[3].to_i, 
+											 :product_id => row[4].to_i
+											}
+					@@sales_by_product[row[4].to_i].push(Sale.new(sale_hash))
+				end
 			end
 
-			return sales
+			return @@sales_by_product
+
 		end
 
 		def self.find(id)

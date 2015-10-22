@@ -14,20 +14,20 @@ module FarMar
 		end
 
 		def self.all
-			market_csv = CSV.read("support/markets.csv")
+			@@markets ||= []
 
-			markets ||= []
-
-			market_csv.each do |row|
-				market_hash = {:identifier => row[0].to_i, :name => row[1], 
-											 :address => row[2], :city => row[3], 
-											 :county => row[4], :state => row[5],
-											 :zip => row[6]
-											}
-				markets.push(Market.new(market_hash))
+			if @@markets = []
+				CSV.read("support/markets.csv").each do |row|
+					market_hash = {:identifier => row[0].to_i, :name => row[1], 
+												 :address => row[2], :city => row[3], 
+												 :county => row[4], :state => row[5],
+												 :zip => row[6]
+												}
+					@@markets.push(Market.new(market_hash))
+				end
 			end
 
-			return markets
+			return @@markets
 		end
 
 		def self.find(id)
@@ -67,19 +67,57 @@ module FarMar
 		end
 
 		def prefered_vendor
-			
+			best_vendor = nil
+			max_val = 0 
+
+			vendors.each do |vendor|
+				if vendor.revenue > max_val
+					max_val = vendor.revenue
+					best_vendor = vendor
+				end
+			end
+
+			return best_vendor
 		end
 
-		def prefered_vendor(date)
-			
+		def preferred_vendor_on(date)
+			date = DateTime.parse(date)
+
+			vendors.max_by do |vendor|
+				sales = vendor.sales.find_all do |sale|
+					sale_date = sale.purchase_time.to_date 
+					sale_date == date
+				end
+
+				sales.inject(0) { |sum, sale| sum + sale.amount }
+			end
 		end
 
 		def worst_vendor
-			
+			worst_vendor = nil 
+			min_val = Float::INFINITY
+
+			vendors.each do |vendor|
+				if vendor.revenue < min_val
+					min_val = vendor.revenue
+					worst_vendor = vendor 
+				end
+			end
+
+			return worst_vendor
 		end
 
-		def worst_vendor(date)
-			
+		def worst_vendor_on(date)
+			date = DateTime.parse(date)
+
+			vendors.min_by do |vendor|
+				sales = vendor.sales.find_all do |sale|
+					sale_date = sale.purchase_time.to_date 
+					sale_date == date
+				end
+
+				sales.inject(0) { |sum, sale| sum + sale.amount }
+			end
 		end
 	end
 end

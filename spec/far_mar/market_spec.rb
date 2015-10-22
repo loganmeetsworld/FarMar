@@ -14,9 +14,9 @@ describe "FarMar::Market" do
 
      market_hash_2 = {
       :identifier => 2,
-      :name =>      "People's Co-op Farmers Market",
-      :address =>   "30th and Burnside",
-      :city =>      "Portland",
+      :name =>      "Silverdale Farmers Market",
+      :address =>   "98192",
+      :city =>      "Silverdale",
       :county =>    "Multnomah",
       :state =>     "OR",
       :zip =>       97202
@@ -95,12 +95,39 @@ describe "FarMar::Market" do
       expect(FarMar::Market.search("Cruickshank").length).to eq 11
       expect(FarMar::Market.search("Cruickshank")[0]).to be_an_instance_of FarMar::Market
     end
+
+    it "returns markets when vendors and markets have name" do 
+      expect(FarMar::Market.search("green").length).to eq 50
+    end
   end
 
   describe "#prefered_vendor" do
     it "returns the vendor with the highest revenue" do 
-      expect(@market_2.prefered_vendor.class).to eq Fixnum
-      expect(@market_2.prefered_vendor).to eq 8
+      expect(@market_2.prefered_vendor).to be_an_instance_of FarMar::Vendor
+      expect(@market_2.prefered_vendor.identifier.class).to eq Fixnum
+      expect(@market_2.prefered_vendor.identifier).to eq 8
+    end
+  end
+
+  describe "#preferred_vendor_on(date)" do 
+    it "returns the vendor with the highest revenue for date" do 
+      expect(@market_2.preferred_vendor_on("2013-11-07")).to be_an_instance_of FarMar::Vendor
+      expect(@market_2.preferred_vendor_on("2013-11-07").identifier).to eq 7
+    end
+  end
+
+  describe "#worst_vendor" do 
+    it "returns the worst vendor" do 
+      expect(@market_2.worst_vendor).to be_an_instance_of FarMar::Vendor
+      expect(@market_2.worst_vendor.identifier.class).to eq Fixnum
+      expect(@market_2.worst_vendor.identifier).to eq 9
+    end
+  end
+
+  describe "#worst_vendor_on(date)" do 
+    it "returns the vendor with the lowest revenue for date" do 
+      expect(@market_2.worst_vendor_on("2013-11-07")).to be_an_instance_of FarMar::Vendor
+      expect(@market_2.worst_vendor_on("2013-11-07").identifier).to eq 9
     end
   end
 end
