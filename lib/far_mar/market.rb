@@ -37,13 +37,44 @@ module FarMar
 		end
 
 		def vendors
-			vendor_array = FarMar::Vendor.all 
-			vendor_array.find_all { |vendor| vendor.market_id == @identifier}
+			FarMar::Vendor.all.find_all { |vendor| vendor.market_id == @identifier}
 		end
 
-		def products 
-			
+		def products
+			products = FarMar::Product.all
+			product_array = []
+
+			vendors.zip(products).each do |vendor, product|
+				if vendor.identifier == product.vendor_id
+					product_array.push(product)
+				end
+			end
+			product_array
 		end
 
+		def self.search(search_term)
+			market_array = []
+			vendor_array = []
+
+			FarMar::Vendor.all.find_all do |vendor|
+				if vendor.name.match(/#{Regexp.escape(search_term)}/i)
+					vendor_array.push(vendor)
+				end
+			end
+
+			vendor_array.each do |row|
+				if row.identifier == @market_id
+					market_array.push(row)
+				end
+			end
+
+			self.all.find_all do |market|
+				if market.name.match(/#{Regexp.escape(search_term)}/i) 
+					market_array.push(market)
+				end
+			end
+
+			return market_array
+		end
 	end
 end
