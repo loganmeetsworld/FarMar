@@ -2,6 +2,12 @@ module FarMar
 	class LookUp
 		class << self
 
+			def find(id)
+				self.all.find do |line|
+					line.identifier.to_i == id
+				end
+			end
+
 			attributes = [
 				"identifier", "name", "address", "city", 
 				"county", "state", "zip", "no_employees",

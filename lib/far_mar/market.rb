@@ -31,9 +31,7 @@ module FarMar
 		end
 
 		def self.find(id)
-			self.all.find do |line|
-				line.identifier.to_i == id
-			end
+			super
 		end
 
 		def vendors

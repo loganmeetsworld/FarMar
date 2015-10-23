@@ -48,38 +48,22 @@ module FarMar
 		end
 
 		def self.find(id)
-			self.all.find do |line|
-				line.identifier.to_i == id
-			end
+			super
 		end
 
 		def vendor
-			vendor_sale_array = FarMar::Vendor.all
-
-			vendor_sale_array.each do |row|
-				if row.identifier == @vendor_id
-					return row
-				end
-			end
+			FarMar::Vendor.all.find { |row| row.identifier == @vendor_id }
 		end
 
 		def product
-			product_sale_array = FarMar::Product.all
-
-			product_sale_array.each do |row|
-				if row.identifier == @product_id
-					return row
-				end
-			end
+			FarMar::Product.all.find { |row| row.identifier == @product_id }
 		end
 
 		def self.between(begin_time, end_time)
 			begin_time = DateTime.parse(begin_time)
       end_time = DateTime.parse(end_time)
 
-      sales_list = self.all
-
-			sales_list.find_all do |instance|
+      self.all.find_all do |instance|
 				(instance.purchase_time > begin_time) && (instance.purchase_time < end_time)
 			end
 		end

@@ -26,9 +26,7 @@ module FarMar
 		end
 
 		def self.find(id)
-			self.all.find do |line|
-				line.identifier.to_i == id
-			end
+			super
 		end
 
 		def market
@@ -42,8 +40,7 @@ module FarMar
 		end
 
 		def products
-			product_array = FarMar::Product.all 
-			return product_array.find_all { |product| product.vendor_id == @identifier }
+			FarMar::Product.all.find_all { |product| product.vendor_id == @identifier }
 		end
 
 		def sales
