@@ -24,18 +24,8 @@ module FarMar
 			return @@products
 		end
 
-		def self.find(id)
-			super
-		end
-
 		def vendor
-			vendor_product_array = FarMar::Vendor.all
-
-			vendor_product_array.each do |row|
-				if row.identifier == @vendor_id
-					return row
-				end
-			end
+			FarMar::Vendor.all.find { |vendor| vendor.identifier == @vendor_id }
 		end
 
 		def sales
@@ -55,10 +45,6 @@ module FarMar
 				end
 			end
 			return product_array
-		end
-
-		def revenue
-			super
 		end
 
 		def self.most_revenue(n)

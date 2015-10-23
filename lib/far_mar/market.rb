@@ -30,10 +30,6 @@ module FarMar
 			return @@markets
 		end
 
-		def self.find(id)
-			super
-		end
-
 		def vendors
 			FarMar::Vendor.all.find_all { |vendor| vendor.market_id == @identifier}
 		end

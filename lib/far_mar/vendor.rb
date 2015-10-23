@@ -25,18 +25,8 @@ module FarMar
 			return @@vendors
 		end
 
-		def self.find(id)
-			super
-		end
-
 		def market
-			vendor_market_array = FarMar::Market.all
-
-			vendor_market_array.each do |row|
-				if row.identifier == @market_id
-					return row
-				end
-			end
+			FarMar::Market.all.find { |market| market.identifier == @market_id }
 		end
 
 		def products
@@ -46,10 +36,6 @@ module FarMar
 		def sales
 			sales_array = FarMar::Sale.sales_by_vendor
 			return sales_array[@identifier]
-		end
-
-		def revenue
-			super
 		end
 
 		def self.by_market(market_id)

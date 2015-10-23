@@ -47,16 +47,12 @@ module FarMar
 			return @@sales_by_vendor
 		end
 
-		def self.find(id)
-			super
-		end
-
 		def vendor
-			FarMar::Vendor.all.find { |row| row.identifier == @vendor_id }
+			FarMar::Vendor.all.find { |vendor| vendor.identifier == @vendor_id }
 		end
 
 		def product
-			FarMar::Product.all.find { |row| row.identifier == @product_id }
+			FarMar::Product.all.find { |product| product.identifier == @product_id }
 		end
 
 		def self.between(begin_time, end_time)
