@@ -147,4 +147,14 @@ describe "FarMar::Vendor" do
     end
   end
 
+  describe "#self.find_by_x(match)" do 
+    it "returns a single instance" do 
+      expect(FarMar::Vendor.find_by_x("")).to be_an_instance_of FarMar::Vendor
+      expect(FarMar::Vendor.find_by_x("").length).to eq 1 
+    end
+
+    it "returns the correct instance for the given attribute" do 
+      expect(FarMar::Vendor.find_by_x("").name).to eq 
+    end
+  end
 end

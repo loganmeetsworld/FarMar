@@ -130,4 +130,35 @@ describe "FarMar::Market" do
       expect(@market_2.worst_vendor_on("2013-11-07").identifier).to eq 9
     end
   end
+
+
+  describe "#self.find_by_x(match)" do 
+    it "returns a single instance" do 
+      expect(FarMar::Market.find_by_name("Silverdale Farmers Market")).to be_an_instance_of FarMar::Market
+      expect(FarMar::Market.find_by_identifier(1)).to be_an_instance_of FarMar::Market  
+      expect(FarMar::Market.find_by_address("30th and Burnside")).to be_an_instance_of FarMar::Market  
+      expect(FarMar::Market.find_by_city("Portland")).to be_an_instance_of FarMar::Market  
+      expect(FarMar::Market.find_by_state("OR")).to be_an_instance_of FarMar::Market     
+      expect(FarMar::Market.find_by_county("Multnomah")).to be_an_instance_of FarMar::Market 
+      expect(FarMar::Market.find_by_zip("97202")).to be_an_instance_of FarMar::Market        
+      expect(FarMar::Market.find_by_name("Silverdale Farmers Market")).to be_an_instance_of FarMar::Market
+    end
+
+    it "returns the correct instance for the given attribute" do 
+      expect(FarMar::Market.find_by_name("silverdale").name).to eq "Silverdale Farmers Market"
+      expect(FarMar::Market.find_by_name("silverdale").city).to eq "Silverdale"
+    end
+  end
+
+
+  describe "#self.find_all_by_x(match)" do 
+    it "returns an array of instances" do 
+      expect(FarMar::Market.find_all_by_name("mobile")).to be_an Array
+      expect(FarMar::Market.find_all_by_name("Silverdale Farmers Market")[0]).to be_an_instance_of FarMar::Market
+    end
+
+    it "returns all the correct instance for the given attribute" do 
+      expect(FarMar::Market.find_all_by_name("mobile").length).to eq 3
+    end
+  end
 end

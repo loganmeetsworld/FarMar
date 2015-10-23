@@ -1,4 +1,3 @@
-require "pry"
 module FarMar
 	class Sale
 
@@ -85,5 +84,9 @@ module FarMar
 			end
 		end
 		
+
+		def self.find_by_x(match)
+			
+		end
 	end
 end

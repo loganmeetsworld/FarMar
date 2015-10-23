@@ -80,4 +80,15 @@ describe "FarMar::Product" do
     end
   end
 
+  describe "#self.find_by_x(match)" do 
+    it "returns a single instance" do 
+      expect(FarMar::Product.find_by_x("")).to be_an_instance_of FarMar::Product
+      expect(FarMar::Product.find_by_x("").length).to eq 1 
+    end
+
+    it "returns the correct instance for the given attribute" do 
+      expect(FarMar::Product.find_by_x("")).to eq 
+    end
+  end
+
 end

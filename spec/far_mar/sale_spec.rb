@@ -60,4 +60,15 @@ describe "FarMar::Sale" do
       expect(FarMar::Sale.between("2013-11-07 05:10:56 -0800", "2013-11-07 05:19:05 -0800").count).to eq 8 
     end
   end
+
+  describe "#self.find_by_x(match)" do 
+    it "returns a single instance" do 
+      expect(FarMar::Sale.find_by_x("")).to be_an_instance_of FarMar::Sale
+      expect(FarMar::Sale.find_by_x("").length).to eq 1 
+    end
+
+    it "returns the correct instance for the given attribute" do 
+      expect(FarMar::Sale.find_by_x("")).to eq 
+    end
+  end
 end

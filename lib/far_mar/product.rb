@@ -73,5 +73,10 @@ module FarMar
 		def self.most_revenue(n)
 			self.all.max_by(n) { |product| product.revenue }
 		end
+
+		def self.find_by_x(match)
+			
+		end
+		
 	end
 end
