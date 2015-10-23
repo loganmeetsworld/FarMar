@@ -49,8 +49,6 @@ module FarMar
 		def self.search(search_term)
 			market_array ||= []
 
-			markets = self.all
-
 			self.all.find_all do |market|
 				if market.name.match(/#{Regexp.escape(search_term)}/i) || market.vendors.any? { |vendor| vendor.name.match(/#{Regexp.escape(search_term)}/i) }
 					market_array.push(market)
