@@ -1,5 +1,5 @@
 module FarMar
-	class Vendor
+	class Vendor < LookUp
 
 		attr_accessor :identifier, :name, :no_employees, :market_id
 

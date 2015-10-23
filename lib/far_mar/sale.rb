@@ -1,5 +1,5 @@
 module FarMar
-	class Sale
+	class Sale < LookUp
 
 		attr_accessor :identifier, :amount, :purchase_time, :vendor_id, :product_id
 

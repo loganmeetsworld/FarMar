@@ -82,12 +82,26 @@ describe "FarMar::Product" do
 
   describe "#self.find_by_x(match)" do 
     it "returns a single instance" do 
-      expect(FarMar::Product.find_by_x("")).to be_an_instance_of FarMar::Product
-      expect(FarMar::Product.find_by_x("").length).to eq 1 
+      expect(FarMar::Product.find_by_name("dry beets")).to be_an_instance_of FarMar::Product
+      expect(FarMar::Product.find_by_name("heavy chicken")).to be_an_instance_of FarMar::Product
+      expect(FarMar::Product.find_by_identifier(1)).to be_an_instance_of FarMar::Product      
     end
 
     it "returns the correct instance for the given attribute" do 
-      expect(FarMar::Product.find_by_x("")).to eq 
+      expect(FarMar::Product.find_by_identifier(1).name).to eq "Dry Beets"
+    end
+  end
+
+  describe "#self.find_all_by_x(match)" do 
+    it "returns an array of instances" do 
+      expect(FarMar::Product.find_all_by_name("beets")).to be_an Array
+      expect(FarMar::Product.find_all_by_name("beets")[0]).to be_an_instance_of FarMar::Product
+    end
+
+    it "returns all the correct instance for the given attribute" do 
+      expect(FarMar::Product.find_all_by_name("fierce").length).to eq 27
+      expect(FarMar::Product.find_all_by_name("fierce")[0].name).to eq "Fierce Greens"
+      expect(FarMar::Product.find_all_by_name("straight").length).to eq 29
     end
   end
 

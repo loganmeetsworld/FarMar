@@ -149,12 +149,26 @@ describe "FarMar::Vendor" do
 
   describe "#self.find_by_x(match)" do 
     it "returns a single instance" do 
-      expect(FarMar::Vendor.find_by_x("")).to be_an_instance_of FarMar::Vendor
-      expect(FarMar::Vendor.find_by_x("").length).to eq 1 
+      expect(FarMar::Vendor.find_by_name("Schmitt Group")).to be_an_instance_of FarMar::Vendor
+      expect(FarMar::Vendor.find_by_no_employees("8")).to be_an_instance_of FarMar::Vendor 
     end
 
     it "returns the correct instance for the given attribute" do 
-      expect(FarMar::Vendor.find_by_x("").name).to eq 
+      expect(FarMar::Vendor.find_by_name("Bernhard-Harber").identifier).to eq 31
+      expect(FarMar::Vendor.find_by_name("Schmitt Group").market_id).to eq 8    
+    end
+  end
+
+  describe "#self.find_all_by_x(match)" do 
+    it "returns an array of instances" do 
+      expect(FarMar::Vendor.find_all_by_name("Schmitt Group")).to be_an Array
+      expect(FarMar::Vendor.find_all_by_name("Schmitt Group")[0]).to be_an_instance_of FarMar::Vendor
+    end
+
+    it "returns all the correct instance for the given attribute" do 
+      expect(FarMar::Vendor.find_all_by_name("group").length).to eq 252
+      expect(FarMar::Vendor.find_all_by_market_id(8).length).to eq 6
+      expect(FarMar::Vendor.find_all_by_name("feil")[0].name).to eq "Feil-Farrell"
     end
   end
 end

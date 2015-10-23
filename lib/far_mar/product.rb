@@ -1,5 +1,5 @@
 module FarMar
-	class Product
+	class Product < LookUp
 
 		attr_accessor :identifier, :name, :vendor_id
 

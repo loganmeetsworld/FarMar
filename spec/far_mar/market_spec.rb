@@ -147,6 +147,7 @@ describe "FarMar::Market" do
     it "returns the correct instance for the given attribute" do 
       expect(FarMar::Market.find_by_name("silverdale").name).to eq "Silverdale Farmers Market"
       expect(FarMar::Market.find_by_name("silverdale").city).to eq "Silverdale"
+      expect(FarMar::Market.find_by_name("silverdale").address).to eq "98383"
     end
   end
 

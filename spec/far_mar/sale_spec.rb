@@ -63,12 +63,25 @@ describe "FarMar::Sale" do
 
   describe "#self.find_by_x(match)" do 
     it "returns a single instance" do 
-      expect(FarMar::Sale.find_by_x("")).to be_an_instance_of FarMar::Sale
-      expect(FarMar::Sale.find_by_x("").length).to eq 1 
+      expect(FarMar::Sale.find_by_amount(9290)).to be_an_instance_of FarMar::Sale
+      expect(FarMar::Sale.find_by_amount(3444)).to be_an_instance_of FarMar::Sale 
     end
 
     it "returns the correct instance for the given attribute" do 
-      expect(FarMar::Sale.find_by_x("")).to eq 
+      expect(FarMar::Sale.find_by_amount(9290).purchase_time).to eq DateTime.parse("2013-11-07 04:34:56 -0800")
+    end
+  end
+
+  describe "#self.find_all_by_x(match)" do 
+    it "returns an array of instances" do 
+      expect(FarMar::Sale.find_all_by_amount(9290)).to be_an Array
+      expect(FarMar::Sale.find_all_by_amount(9290)[0]).to be_an_instance_of FarMar::Sale
+    end
+
+    it "returns all the correct instance for the given attribute" do 
+      expect(FarMar::Sale.find_all_by_amount(9290).length).to eq 5
+      expect(FarMar::Sale.find_all_by_amount(9290)[0].purchase_time).to eq DateTime.parse("2013-11-07 04:34:56 -0800")
+      expect(FarMar::Sale.find_all_by_purchase_time(DateTime.parse("2013-11-12 00:57:38 -0800"))[0].amount).to eq 9820
     end
   end
 end
