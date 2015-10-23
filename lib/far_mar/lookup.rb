@@ -1,5 +1,17 @@
 module FarMar
 	class LookUp
+		
+		def revenue
+			revenue_array = []
+
+			sales.each do |sale|
+				revenue = sale.amount
+				revenue_array << revenue
+			end
+
+			return revenue_array.inject(0) {|result, element| result + element}
+		end
+
 		class << self
 
 			def find(id)
