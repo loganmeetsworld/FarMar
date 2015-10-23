@@ -83,10 +83,5 @@ module FarMar
 				(instance.purchase_time > begin_time) && (instance.purchase_time < end_time)
 			end
 		end
-		
-
-		def self.find_by_x(match)
-			
-		end
 	end
 end

@@ -108,9 +108,5 @@ module FarMar
 			
 			return revenue_array.inject(0) { |sum, amount| sum + amount }
 		end
-
-		def self.find_by_x(match)
-			
-		end
 	end
 end

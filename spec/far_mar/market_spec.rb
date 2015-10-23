@@ -148,7 +148,13 @@ describe "FarMar::Market" do
       expect(FarMar::Market.find_by_name("silverdale").name).to eq "Silverdale Farmers Market"
       expect(FarMar::Market.find_by_name("silverdale").city).to eq "Silverdale"
       expect(FarMar::Market.find_by_name("silverdale").address).to eq "98383"
+      expect(FarMar::Market.find_by_identifier(5).name).to eq "Quincy Farmers Market"
     end
+
+    it "doesn't return anything when there is no attribute" do 
+      expect(FarMar::Market.find_by_identifier(234989304)).to eq nil
+    end
+
   end
 
 

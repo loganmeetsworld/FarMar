@@ -41,8 +41,8 @@ module FarMar
 		end
 
 		def sales
-			sales_array = FarMar::Sale.sales_by_product
-			return sales_array[@identifier]
+			sales_hash = FarMar::Sale.sales_by_product
+			return sales_hash[@identifier]
 		end
 
 		def number_of_sales
@@ -73,10 +73,5 @@ module FarMar
 		def self.most_revenue(n)
 			self.all.max_by(n) { |product| product.revenue }
 		end
-
-		def self.find_by_x(match)
-			
-		end
-		
 	end
 end
