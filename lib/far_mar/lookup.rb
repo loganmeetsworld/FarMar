@@ -1,6 +1,6 @@
 module FarMar
-	class Lookup
-		class << self 
+	class LookUp
+		class << self
 
 			["identifier", "name", "address", "city", "county", "state", "zip"].each do |attribute|
 		  	define_method("find_by_#{attribute}") do |argument|
@@ -20,9 +20,6 @@ module FarMar
 			    end
 		  	end
 		  end
-		end
-
-		class << self 
 
 			["id", "name", "address", "city", "county", "state", "zip"].each do |attribute|
 		  	define_method("find_all_by_#{attribute}") do |argument|
@@ -40,8 +37,10 @@ module FarMar
 			    		end
 			    	end
 			    end
+
 		  	end
 		  end
 		end
+	
 	end
 end

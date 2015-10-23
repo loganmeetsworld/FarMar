@@ -159,6 +159,7 @@ describe "FarMar::Market" do
 
     it "returns all the correct instance for the given attribute" do 
       expect(FarMar::Market.find_all_by_name("mobile").length).to eq 3
+      expect(FarMar::Market.find_all_by_state("Louisiana").length).to eq 6
     end
   end
 end
